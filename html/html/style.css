@@ -1,0 +1,53 @@
+body {
+ font-family: "Al Nile";
+}
+
+#main {
+    background-color: #C8FBE3;
+}
+
+ul {
+    list-style: none;
+    display: inline;
+}
+
+ul li {
+    display: inline-block;
+}
+
+ul li a {
+    color: green;
+    text-decoration: none;
+    font-weight: bold;
+    /*display: inline-block;*/
+}
+
+ul li ul li a {
+    color: #70D5A5;
+}
+
+#title {
+    background-color: green;
+    color: white;
+    padding-left: 10px;
+}
+
+p {
+    padding: 10px;
+}
+
+#sdaLogo {
+    background-color: white;
+    margin: 0 10px;
+}
+
+.subtitles {
+    background-color: lightgreen;
+    padding-left: 10px;
+    color: white;
+}
+
+tr, td {
+    /*border-bottom: grey;*/
+    border-bottom: 1px solid black;
+}
