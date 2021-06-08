@@ -40,10 +40,10 @@ if(isset($_GET['order_id'])){
                     <label for="product" class="form-label">Product</label>
                     <select name="product" id="product" class="form-control">
                         <option <?= $order['product'] === '' ? 'selected': ''?> value="">Choose product</option>
-                        <option <?= $order['product'] === 'bluze' ? 'selected':''?> value="bluze">Bluze</option>
-                        <option <?= $order['product'] === 'kepuce' ? 'selected':''?> value="kepuce">Kepuce</option>
-                        <option <?= $order['product'] === 'xhakete' ? 'selected':''?> value="xhakete">Xhaket</option>
-                        <option <?= $order['product'] === 'xhup' ? 'selected':''?> value="xhup">Xhup</option>
+                        <option <?= $order['product'] === 'T Shirt' ? 'selected':''?> value="T Shirt">T Shirt</option>
+                        <option <?= $order['product'] === 'Shoes' ? 'selected':''?> value="Shoes">Shoes</option>
+                        <option <?= $order['product'] === 'Jacket' ? 'selected':''?> value="Jacket">Jacket</option>
+                        <option <?= $order['product'] === 'SweatShirt' ? 'selected':''?> value="SweatShirt">SweatShirt</option>
                     </select>
                 </div>
                 <div class="mb-3">
