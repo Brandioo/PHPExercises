@@ -83,23 +83,28 @@ const description = `Hello World my name is ${name}`;
 //
 // getOrder("order_1")
 
-const jsonValues = {
-    "name": "Brand",
-    "lastName": "Citozi"
-}
+// const jsonValues = {
+//     "name": "Brand",
+//     "lastName": "Citozi"
+// }
+//
+// // console.log(JSON.stringify(jasonValues));
+//
+// const val='{"name":"silvi","lastName":"lila"}';
+// console.log(JSON.parse(val));
 
-function CustomObject() {
-    this.name = "Brand";
-    this.lastName = "Citozi";
-
-    this.getFullName = function () {
-        return `${this.name} ${this.lastName}`;
-    }
-}
-
-CustomObject.prototype.fullName = function () {
-    console.log("Brand Citozi");
-}
-
-const custom = new CustomObject();
-const custom1 = new CustomObject();
+// function CustomObject() {
+//     this.name = "Brand";
+//     this.lastName = "Citozi";
+//
+//     this.getFullName = function () {
+//         return `${this.name} ${this.lastName}`;
+//     }
+// }
+//
+// CustomObject.prototype.fullName = function () {
+//     console.log("Brand Citozi");
+// }
+//
+// const custom = new CustomObject();
+// const custom1 = new CustomObject();
