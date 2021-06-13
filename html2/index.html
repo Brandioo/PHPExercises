@@ -1,2 +1,43 @@
-<!--<script src="./main.js"></script>-->
-<script src="./storage.js"></script>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+<div id="root">
+    <div class="container">
+        <div class="nav p-2 bg-info">
+            <h3> Add you Tasks </h3>
+        </div>
+        <div class="card mt-2">
+            <div class="card-header" id="task-header">
+                <form method="post" id="form">
+                    <div class="d-flex">
+                        <input type="text" class="form-control mr-2" id="inputTask">
+                        <button class="btn btn-primary ml-2" id="addTask">Add Task</button>
+                        <br>
+                    </div>
+                </form>
+                <button class="btn btn-primary ml-2" id="DeleteTask">Delete All</button>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item">An Item</li>
+                    <li class="list-group-item">Second Item</li>
+                    <li class="list-group-item">Third Item</li>
+                    <li class="list-group-item">Fourth Item</li>
+                    <li class="list-group-item">Fifth Item</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./dom.js"></script>
+</body>
+</html>
