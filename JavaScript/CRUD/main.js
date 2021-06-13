@@ -1,6 +1,11 @@
 let form = document.querySelector("#form");
 let table = document.querySelector("#table");
 let tbody = table.querySelector('tbody');
+const storage=new Storage("tasks");
+
+// console.log(`taks_${Date.now()`);
+
+
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
