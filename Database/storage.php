@@ -1,3 +1,4 @@
+//Brand SDA Academy PHP
 <?php
 
 interface IStorage
@@ -68,6 +69,7 @@ echo $user->getAllUsers();
 echo $user->saveUsers('Brand');
 echo $user->deleteUser("Brand");
 echo "---------------------------------------------------------------------------------------------------- <br>";
+
 class FileStorage implements IStorage
 {
 
