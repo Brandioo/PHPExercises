@@ -8,20 +8,28 @@ interface Insurance
     public function getYearsOfSponsorShip();
 }
 
+interface InsuranceWithParameters
+{
+    public function getInsuranceName(string $name);
 
-class Sigal implements Insurance
+    public function getYearsOfSponsorShip(int $years);
+}
+
+
+class Sigal implements InsuranceWithParameters
 {
 
-    public function getInsuranceName()
+
+    public function getInsuranceName(string $name)
     {
         // TODO: Implement getInsuranceName() method.
-        return "Sigal";
+        return $name;
     }
 
-    public function getYearsOfSponsorShip()
+    public function getYearsOfSponsorShip(int $years)
     {
         // TODO: Implement getYearsOfSponsorShip() method.
-        return "Years Of Sponsorships 15";
+        return $years;
     }
 }
 
@@ -53,9 +61,24 @@ class Run
     }
 }
 
-$run = new Run;
-$sigal = new Sigal;
-$sigma = new Sigma;
+//$run = new Run;
+//$sigal = new Sigal;
+//$sigma = new Sigma;
+//
+////echo $run->getFullInfo($sigal);
+//echo $run->getFullInfo($sigma);
 
-echo $run->getFullInfo($sigal);
-echo $run->getFullInfo($sigma);
+class RunWithParameters
+{
+    public function getFullInfo(InsuranceWithParameters $instance)
+    {
+        $name = "Insurance for Car";
+        $years = 5;
+        return "<br> {$instance->getInsuranceName($name)}---{$instance->getYearsOfSponsorShip($years)} <br>";
+    }
+}
+
+
+$runWithParameters = new RunWithParameters;
+$sigal = new Sigal();
+echo $runWithParameters->getFullInfo($sigal);

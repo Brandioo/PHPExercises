@@ -8,9 +8,18 @@ interface IPerson
     public function getAge();
 }
 
+abstract class AbstractClass implements IPerson
+{
+    public abstract function getLastName();
+
+    public function getAge()
+    {
+        return "Ca moshe je";
+    }
+}
+
 class Brand implements IPerson
 {
-
     public function getFullName()
     {
         // TODO: Implement getFullName() method.
@@ -21,6 +30,11 @@ class Brand implements IPerson
     {
         // TODO: Implement getAge() method.
         return 20;
+    }
+
+    public static function getLastName()
+    {
+        echo "My last name is Citozi <br>";
     }
 }
 
@@ -67,10 +81,12 @@ class Run
         return $instance->getFullName2();
     }
 }
-
-$run = new Run;
-$silvi = new Silvi;
-$brand1 = new Brand;
-
-echo $run->getPersonFUllName($silvi);
+//
+//$run = new Run;
+//$silvi = new Silvi;
+//$brand1 = new Brand;
+//
+//echo $run->getPersonFUllName($silvi);
 //echo $run->getPersonFUllName($brand1);
+
+echo Brand::getLastName();
