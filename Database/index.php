@@ -1,5 +1,13 @@
 <?php
 
+interface IStorage
+{
+public function get($key);
+public function set($key,$value);
+public function getAll();
+public function delete($key);
+}
+
 class Database
 {
     private string $host;
