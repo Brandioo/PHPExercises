@@ -9,6 +9,16 @@ class University
     public array $courses = [];
     public array $trainers = [];
     public array $students = [];
+    public array $staffs = [];
+
+    /**
+     * @param array $staff
+     */
+    public function setStaff(Staff $staff): void
+    {
+        $this->staffs[] = $staff;
+    }
+
 
     /**
      * @return mixed
@@ -117,28 +127,46 @@ class University
         return $this->name;
     }
 
+
     public function printAll()
     {
-        echo "University name: {$this->name} <br>";
-        echo "City: {$this->city} <br>";
-        echo "Address: {$this->address} <br>";
+        echo "<br>";
+        echo "<br>*University name: {$this->name} <br>";
+        echo "---City: {$this->city} <br>";
+        echo "---Address: {$this->address} <br>";
+        echo "---------------------------------------------<br>";
 
-        foreach ($this->courses as $course) {
-            echo "Course Name: {$course->name} <br>";
-            echo "Course Instructor: {$course->trainers->fullName} <br>";
-            echo "---------------------------------------------<br>";
-            echo "Students: <br>";
-            foreach ($this->students as $student) {
-                echo "Student Name: {$student->name} <br>";
-                echo "Student LastName: {$student->lastName} <br>";
-                echo "Student Age: {$student->age} <br>";
-                echo "---------------------------------------------<br>";
-            }
+        echo "University Staff: <br>";
+        foreach ($this->staffs as $staff) {
+            echo "---Name: {$staff->name} | | | ";
+            echo "---Role: {$staff->role}<br>";
+        }
+        echo "---------------------------------------------<br>";
+        echo "University Students: <br>";
+        foreach ($this->students as $student) {
+            echo "---Student Name: {$student->name} | | ";
+            echo "---Student LastName: {$student->lastName} | | ";
+            echo "---Student Age: {$student->age} <br>";
         }
 
-
+        echo "---------------------------------------------<br>";
+        echo "University Trainers: <br>";
         foreach ($this->trainers as $trainer) {
-            echo "Trainer Full-Name: {$trainer->fullName} <br>";
+            echo "---Trainer Full-Name: {$trainer->fullName} <br>";
+        }
+
+        echo "---------------------------------------------<br>";
+        foreach ($this->courses as $course) {
+            echo "*Course <br>";
+            echo "Course Name: {$course->name} | | ";
+            echo "Course Instructor: {$course->trainers->fullName} <br>";
+            echo "---------------------<br>";
+            echo "Course Students: <br>";
+            foreach ($course->students as $student) {
+                echo "---Student Name: {$student->name} | | ";
+                echo "---Student LastName: {$student->lastName} | | ";
+                echo "---Student Age: {$student->age} <br>";
+            }
             echo "---------------------------------------------<br>";
         }
 
@@ -149,13 +177,14 @@ class University
 class Course
 {
     public $name;
-    public $time;
+//    public $time;
     public $students = [];
     public $trainers;
 
-    public function __construct($name)
+    public function __construct($name, $trainers)
     {
         $this->name = $name;
+        $this->trainers = $trainers;
     }
 
 
@@ -164,12 +193,10 @@ class Course
         $this->students[] = $students;
     }
 
-    public function setTrainers(Trainer $trainers): void
-    {
-        $this->trainers = $trainers;
-    }
-
-
+//    public function setTrainers(Trainer $trainers): void
+//    {
+//        $this->trainers[] = $trainers;
+//    }
 }
 
 class Student
@@ -190,57 +217,69 @@ class Student
 class Trainer
 {
     public $fullName;
-    public array $courses = [];
 
-    public function __construct($name, $course)
+    public function __construct($name)
     {
         $this->fullName = $name;
-        $this->course = $course;
     }
 
-    /**
-     * @return array
-     */
-    public function getCourses(): array
-    {
-        return $this->courses;
-    }
-
-    /**
-     * @param array $courses
-     */
-//    public function setCourses(array $courses): void
-//    {
-//        $this->courses = $courses;
-//    }
-
-    public function setCourses(Course $courses): void
-    {
-        $this->courses[] = $courses;
-    }
 
 }
 
+class Staff
+{
+    public $name;
+    public $role;
+
+    public function __construct($name, $role)
+    {
+        $this->name = $name;
+        $this->role = $role;
+    }
+}
+
+//require_once = "./Uni.php"; //Required Class (Import)
+
 $university = new University();
 $university->setName("Epoka");
-$university->setAddress("BULEVARDI Zogu 1");
+$university->setAddress("Autostrada Tirane-Durres Kilometri 5");
 $university->setCity("Tirana");
 
-$course = new Course("PHP", "Silvi");
+$director = new Staff("Bilbil Beqiri", "Director");
+$sekretare = new Staff("Xhoena Polis", "Sekretare");
+
+$university->setStaff($director);
+$university->setStaff($sekretare);
+
+//set Trainers
+$PHPtrainer = new Trainer("Silvi Lila");
+$JAVAtrainer = new Trainer("Nick Balani");
+
+//input in University
+$university->setTrainers($PHPtrainer);
+$university->setTrainers($JAVAtrainer);
+
+//Set Courses
+$PHPcourse = new Course("PHP", $PHPtrainer);
+$JAVAcourse = new Course("JAVA", $JAVAtrainer);
+
+//input in University
+$university->setCourses($PHPcourse);
+$university->setCourses($JAVAcourse);
+
+//Set Students
 $studentBrand = new Student("Brand", "Citozi", 20);
+$studentXhoi = new Student("Xhoi", "Hysa", 18);
 $studentBesmir = new Student("Besmir", "Beqo", 25);
-$trainerSilvi = new Trainer("Silvi", "PHP");
-$university->setCourses($course);
-$course->setStudents($studentBrand);
-$course->setStudents($studentBesmir);
-$course->setStudents($studentBesmir);
 
-$course->setTrainers($trainerSilvi);
-$trainerSilvi->setCourses($course);
-$university->setTrainers($trainerSilvi);
+//input in Course
+$PHPcourse->setStudents($studentBrand);
+$JAVAcourse->setStudents($studentXhoi);
+$JAVAcourse->setStudents($studentBesmir);
 
-
+//input in University
 $university->setStudents($studentBrand);
+$university->setStudents($studentXhoi);
 $university->setStudents($studentBesmir);
 
 $university->printAll();
