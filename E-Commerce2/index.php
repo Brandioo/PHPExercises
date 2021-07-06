@@ -1,15 +1,23 @@
 <?php
+
 //session_start();
-interface IStorage{
+interface IStorage
+{
     public function set($key, $value);
+
     public function get($key);
+
     public function delete($key);
+
     public function destroy();
+
     public function all();
 }
+
 class SessionStorage implements IStorage
 {
     protected $storageKey = 'items';
+
     public function __construct($storageKey = null)
     {
         if ($storageKey) {
@@ -19,10 +27,12 @@ class SessionStorage implements IStorage
             $_SESSION[$this->storageKey] = [];
         }
     }
+
     public function set($key, $value)
     {
         $_SESSION[$this->storageKey][$key] = serialize($value);
     }
+
     public function get($key)
     {
         if (!isset($_SESSION[$this->storageKey][$key])) {
@@ -30,14 +40,17 @@ class SessionStorage implements IStorage
         }
         return unserialize($_SESSION[$this->storageKey][$key]);
     }
+
     public function delete($key)
     {
         unset($_SESSION[$this->storageKey][$key]);
     }
+
     public function destroy()
     {
         unset($_SESSION[$this->storageKey]);
     }
+
     public function all()
     {
         $items = [];
@@ -47,9 +60,11 @@ class SessionStorage implements IStorage
         return $items;
     }
 }
+
 class FileStorage implements IStorage
 {
     protected $storageKey = 'items';
+
     public function __construct($storageKey = null)
     {
         if ($storageKey) {
@@ -59,16 +74,19 @@ class FileStorage implements IStorage
             mkdir("storage/{$this->storageKey}");
         }
     }
+
     public function set($key, $value)
     {
-        file_put_contents("storage/{$this->storageKey}/{$key}", serialize($value), FILE_APPEND );
+        file_put_contents("storage/{$this->storageKey}/{$key}", serialize($value), FILE_APPEND);
     }
+
     public function get($key)
     {
         if ($this->keyExists($key)) {
             return unserialize(file_get_contents("storage/{$this->storageKey}/{$key}"));
         }
     }
+
     public function delete($key)
     {
         if (!$this->keyExists($key)) {
@@ -76,6 +94,7 @@ class FileStorage implements IStorage
         }
         unlink("storage/{$this->storageKey}/{$key}");
     }
+
     public function destroy()
     {
         $dir = opendir("storage/{$this->storageKey}");
@@ -85,6 +104,7 @@ class FileStorage implements IStorage
             }
         }
     }
+
     public function all()
     {
         $items = [];
@@ -96,31 +116,46 @@ class FileStorage implements IStorage
         }
         return $items;
     }
+
     protected function keyExists($key)
     {
         return file_exists("storage/{$this->storageKey}/{$key}");
     }
 }
-class Storage{
+
+class Storage
+{
     private IStorage $storage;
-    public function __construct(IStorage $storage){
+
+    public function __construct(IStorage $storage)
+    {
         $this->storage = $storage;
     }
-    public function setItem($key, $value){
+
+    public function setItem($key, $value)
+    {
         return $this->storage->set($key, $value);
     }
-    public function getItem($key){
+
+    public function getItem($key)
+    {
         return $this->storage->get($key);
     }
-    public function deleteItem($key){
+
+    public function deleteItem($key)
+    {
         return $this->storage->delete($key);
     }
-    public function getAll(){
+
+    public function getAll()
+    {
         return $this->storage->all();
     }
 }
+
 $session = new SessionStorage;
 $file = new FileStorage;
 $storage = new Storage($file);
 $storage->setItem("silvi", ['name' => "silvi", "lastName" => 'lila']);
+$storage->setItem("Brand", ['name' => "Brand", "lastName" => 'Citozi']);
 var_dump($storage->getAll());
