@@ -31,7 +31,7 @@ $db = $database->open();
             <tbody id="table-body">
             <?php
             try {
-                $sql = "SELECT * FROM cars ORDER BY carID DESC";
+                $sql = "SELECT * FROM cars ORDER BY carID ASC";
                 foreach ($db->query($sql) as $row) {
                     ?>
                     <tr class="table-row">

@@ -12,7 +12,6 @@ try{
     if($pdo){
         echo "Lidhja me databazen $db ishte e sukseshme";
     }
-    
 }catch (PDOException $e){
     echo $e->getMessage();
 }
