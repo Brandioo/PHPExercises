@@ -6,12 +6,10 @@
 //var_dump($_POST['transmission']);
 //var_dump($_POST['price']);
 //var_dump($_POST['state']);
-include "conn1.php";
+include "config.php";
 include "conn.php";
 
-$database = new Connection();
-
-$db = $database->open();
+$db = Connection::open($configArray);
 
 //variabli i queryit
 $sql = "INSERT INTO cars (firm, type, yearOfProduction, KMDone, transmission, price, state) 

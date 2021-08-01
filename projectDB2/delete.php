@@ -1,9 +1,9 @@
 <?php
 include "conn.php";
+include "config.php";
 
-$database = new Connection();
 
-$db = $database->open();
+$db = Connection::open($configArray);
 
 //variabli i queryit
 $sql = "DELETE FROM cars WHERE carID = :id";

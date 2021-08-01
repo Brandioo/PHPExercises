@@ -1,19 +1,18 @@
 <?php
+require "config.php";
 class Connection
 {
-    private string $server = "mysql:host=localhost;dbname=carmanage";
-    private string $user = "root";
-    private string $password = "";
-    private array $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC);
+    private static $db = null;
 
-    protected $dbh;
-
-
-    public function open()
+    public static function open($configArray)
     {
         try {
-            $this->dbh = new PDO($this->server, $this->user, $this->password, $this->options);
-            return $this->dbh;
+            if (!self::$db) {
+                self::$db = new PDO($configArray["dns"], $configArray["username"], $configArray["password"],
+                    array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC));
+            }
+
+            return self::$db;
 //            echo "Success";
         } catch (PDOException $exception) {
             echo "No Relation At All!" . $exception->getMessage();
