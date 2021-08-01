@@ -6,6 +6,7 @@
 //var_dump($_POST['transmission']);
 //var_dump($_POST['price']);
 //var_dump($_POST['state']);
+include "conn1.php";
 include "conn.php";
 
 $database = new Connection();

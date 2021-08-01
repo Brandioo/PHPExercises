@@ -26,6 +26,7 @@ $db = $database->open();
                 <th class="table-header">Transmission</th>
                 <th class="table-header">Price</th>
                 <th class="table-header">State</th>
+                <th class="table-header">Actions</th>
             </tr>
             </thead>
             <tbody id="table-body">
@@ -43,6 +44,10 @@ $db = $database->open();
                         <td><?php echo $row['transmission'] ?></td>
                         <td><?php echo $row['price'] ?></td>
                         <td><?php echo $row['state'] ?></td>
+                        <td><?php echo '<a href="delete.php?id=' . $row['carID'] . '" >Delete</a>' ?></td>
+                        <td><a href="https://www.google.com/">Google</a></td>
+                        <td><?php echo '<a href="update.php?id=' . $row['carID'] . '" >Update</a>' ?></td>
+
                     </tr>
                 <?php }
             } catch (PDOException $exception) {
