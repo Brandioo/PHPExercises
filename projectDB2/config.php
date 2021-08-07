@@ -4,13 +4,4 @@ $configArray = [
     "username" => "root",
     "password" => ""
 ];
-
-
-
-
-
-
-
-
-
 ?>

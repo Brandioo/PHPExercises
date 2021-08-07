@@ -11,7 +11,6 @@ class Connection
                 self::$db = new PDO($configArray["dns"], $configArray["username"], $configArray["password"],
                     array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC));
             }
-
             return self::$db;
 //            echo "Success";
         } catch (PDOException $exception) {

@@ -1,19 +1,12 @@
 <?php
-
 include "header.php";
 include "footer.php";
-include "conn.php";
-include "config.php";
-
-$db = Connection::open($configArray);
-
 ?>
-
 <div class="container">
     <div class="row">
         <div style="text-align: right; margin: 10px;">
             <button type="button" class="btn btn-primary text-left" data-toggle="modal" data-target="#addModal">
-                Shto Makine
+                Add Car
             </button>
         </div>
         <table class="table table-responsive">
@@ -32,29 +25,29 @@ $db = Connection::open($configArray);
             </thead>
             <tbody id="table-body">
             <?php
-            try {
-                $sql = "SELECT * FROM cars ORDER BY carID ASC";
-                foreach ($db->query($sql) as $row) {
-                    ?>
-                    <tr class="table-row">
-                        <td><?php echo $row['carID'] ?></td>
-                        <td><?php echo $row['firm'] ?></td>
-                        <td><?php echo $row['type'] ?></td>
-                        <td><?php echo $row['yearOfProduction'] ?></td>
-                        <td><?php echo $row['KMDone'] ?></td>
-                        <td><?php echo $row['transmission'] ?></td>
-                        <td><?php echo $row['price'] ?></td>
-                        <td><?php echo $row['state'] ?></td>
-                        <td><?php echo '<a href="delete.php?id=' . $row['carID'] . '" >Delete</a>' ?></td>
-                        <td><a href="https://www.google.com/">Google</a></td>
-                        <td><?php echo '<a href="update.php?id=' . $row['carID'] . '" >Update</a>' ?></td>
+            foreach ($cars as $row) {
+                ?>
+                <tr class="table-row">
+                    <td><?php echo $row['carID'] ?></td>
+                    <td><?php echo $row['firm'] ?></td>
+                    <td><?php echo $row['type'] ?></td>
+                    <td><?php echo $row['yearOfProduction'] ?></td>
+                    <td><?php echo $row['KMDone'] ?></td>
+                    <td><?php echo $row['transmission'] ?></td>
+                    <td><?php echo $row['price'] ?></td>
+                    <td><?php echo $row['state'] ?></td>
+                    <td>
+                        <form method="POST" action="/delete/<?= $row['carID']?>">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                    <td><a href="https://www.google.com/">Google</a></td>
+                    <td><?php echo '<a href="update/' . $row['carID'] . '" >Update</a>' ?></td>
 
-                    </tr>
-                <?php }
-            } catch (PDOException $exception) {
-                echo "Problem In Connection...Please Try Again Later" . $exception->getMessage();
-                $database->close();
-            } ?>
+                </tr>
+                <?php
+            }
+            ?>
             </tbody>
         </table>
     </div>
@@ -69,7 +62,7 @@ $db = Connection::open($configArray);
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="insert.php">
+                    <form method="POST" action="/">
                         Firm: <input class="form-control" type="text" name="firm"/>
                         Type: <input class="form-control" type="text" name="type"/>
                         Year of Production: <input class="form-control" type="number" name="number"/>
