@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<?php require "css/updatefomcss.php" ?>
+<?php require "updatefomcss.php" ?>
 <body>
 <div>
     <form action="/save" method="POST">

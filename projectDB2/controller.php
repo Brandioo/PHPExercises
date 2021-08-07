@@ -20,6 +20,7 @@ function getCars()
 
 function getCar($id)
 {
+
     $db = getDB();
 
     $sql = "SELECT * FROM cars where carID = :id";
@@ -29,10 +30,11 @@ function getCar($id)
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($data) {
-        require "form_update.php";
+        require "views/form_update.php";
     } else {
         die("Nuk ekziston nje makine me kete id!");
     }
+
 }
 
 function deleteCar($id)
