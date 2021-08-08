@@ -39,7 +39,6 @@ if (!empty($_SERVER['REQUEST_URI'])) {
     if ($_SERVER['REQUEST_URI'] == '/' && $_SERVER['REQUEST_METHOD'] == 'GET') {
         getCars();
     } elseif (strpos($_SERVER['REQUEST_URI'], '/delete/') !== false && $_SERVER['REQUEST_METHOD'] == 'POST') {
-
         $uriParts = explode("/", $_SERVER['REQUEST_URI']);
         $id = $uriParts[2];
         deleteCar($id);

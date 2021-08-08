@@ -1,5 +1,6 @@
 <?php
 
+
 function getDB()
 {
     include "conn.php";
@@ -37,47 +38,18 @@ function getCar($id)
 
 }
 
-function deleteCar($id)
-{
-    $db = getDB();
-
-    $sql = "DELETE FROM cars where carID = :id";
-    $stmt = $db->prepare($sql);
-
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    header('location:/');
-
-}
-
 function updateCars()
 {
     $db = getDB();
 
-    $sql = "
-    UPDATE cars
-SET firm = :firm, type = :type ,
-    yearOfProduction = :yearOfProduction,
-    KMDone = :KMDone,
-    transmission = :transmission,
-    price = :price,
-    state = :state
-WHERE carID = :id;
-    ";
+//variabli i queryit
 
-    $stmt = $db->prepare($sql);
+    require "model/Car.php";
 
-    $stmt->bindparam(':firm', $_POST['firm'], PDO::PARAM_STR);
-    $stmt->bindparam(':type', $_POST['type'], PDO::PARAM_STR);
-    $stmt->bindparam(':yearOfProduction', $_POST['number'], PDO::PARAM_STR);
-    $stmt->bindparam(':KMDone', $_POST['kmdone'], PDO::PARAM_INT);
-    $stmt->bindparam(':transmission', $_POST['transmission'], PDO::PARAM_STR);
-    $stmt->bindparam(':price', $_POST['price'], PDO::PARAM_INT);
-    $stmt->bindparam(':state', $_POST['state'], PDO::PARAM_STR);
-    $stmt->bindparam(':id', $_POST['id'], PDO::PARAM_INT);
+    $updateCar = new Car($_POST['firm'], $_POST['type'], $_POST['number'],
+        $_POST['kmdone'], $_POST['transmission'], $_POST['price'], $_POST['state'], $_POST['id']);
 
-    $stmt->execute();
+    $updateCar->update($db);
     header('location:/');
 }
 
@@ -86,20 +58,20 @@ function addCar()
     $db = getDB();
 
 //variabli i queryit
-    $sql = "INSERT INTO cars (firm, type, yearOfProduction, KMDone, transmission, price, state) 
-VALUES(:firm,:type,:yearOfProduction,:KMDone,:transmission,:price,:state)";
 
-    $stmt = $db->prepare($sql);
+    require "model/Car.php";
+    $saveCar = new Car($_POST['firm'], $_POST['type'], $_POST['number'],
+        $_POST['kmdone'], $_POST['transmission'], $_POST['price'], $_POST['state']);
 
-    $stmt->bindparam(':firm', $_POST['firm'], PDO::PARAM_STR);
-    $stmt->bindparam(':type', $_POST['type'], PDO::PARAM_STR);
-    $stmt->bindparam(':yearOfProduction', $_POST['number'], PDO::PARAM_STR);
-    $stmt->bindparam(':KMDone', $_POST['kmdone'], PDO::PARAM_INT);
-    $stmt->bindparam(':transmission', $_POST['transmission'], PDO::PARAM_STR);
-    $stmt->bindparam(':price', $_POST['price'], PDO::PARAM_INT);
-    $stmt->bindparam(':state', $_POST['state'], PDO::PARAM_STR);
+    $saveCar->save($db);
 
-    $stmt->execute();
     header('location:/');
 }
 
+
+function deleteCar($id)
+{
+    require "model/Car.php";
+    Car::delete($id);
+    header('location:/');
+}
